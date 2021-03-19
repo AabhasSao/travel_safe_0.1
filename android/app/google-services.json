@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "454623207626",
+    "project_id": "travel-safe-a5f8c",
+    "storage_bucket": "travel-safe-a5f8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454623207626:android:a82050d7ec74fd954d1433",
+        "android_client_info": {
+          "package_name": "com.four_zero_four.travel_safe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454623207626-a4thsvs8tusb95uksnfrg8p8vgipf9er.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.four_zero_four.travel_safe",
+            "certificate_hash": "25529676494d03549911eec1ddffb493ef3e7c56"
+          }
+        },
+        {
+          "client_id": "454623207626-97ociuakd4njn6puau3ilf46lt008r9a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLPhLI4pKpBElnylA8s_3i6TKcsP3xqPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454623207626-97ociuakd4njn6puau3ilf46lt008r9a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
