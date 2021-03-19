@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_safe/models/GetDriver.dart';
 import 'package:travel_safe/screens/driver.dart';
 
 class QrScanner extends StatelessWidget {
@@ -16,7 +15,13 @@ class QrScanner extends StatelessWidget {
             child: Text('Go'),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Driver()));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Driver(
+                    vehicleId: vehicle.text,
+                  ),
+                ),
+              );
             },
           ),
         ],

@@ -18,12 +18,12 @@ class GetDriver extends StatelessWidget {
         if (snapshot.hasError) {
           return Text("Something went wrong");
         }
-
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data = snapshot.data.data();
-          return Text("Full Name: ${data['name']}");
+          return data == null
+              ? Text("Not found")
+              : Text("Full Name: ${data['name']}");
         }
-
         return Loading();
       },
     );

@@ -13,6 +13,9 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+        ),
         body: ChangeNotifierProvider(
           create: (context) => GoogleSignInProvider(),
           child: StreamBuilder(
