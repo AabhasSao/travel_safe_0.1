@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_safe/services/authentication/auth.dart';
+
+import '../GoogleSignInProvider.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -19,14 +22,10 @@ class _SignInState extends State<SignIn> {
       body: Container(
         child: RaisedButton(
           child: Text('sign in with google'),
-          onPressed: () async {
-            dynamic res = await _auth.signInWithGoogle();
-            if (res == null) {
-              print('sigin failed');
-            } else {
-              print('sucess ' + res.user.uid);
-              return res;
-            }
+          onPressed: () {
+            final provider =
+                Provider.of<GoogleSignInProvider>(context, listen: false);
+            provider.login();
           },
         ),
       ),

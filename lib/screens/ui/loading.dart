@@ -4,8 +4,8 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Container(
-        child: Text('loading'),
+      home: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
