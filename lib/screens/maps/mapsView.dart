@@ -490,41 +490,80 @@ class _MapViewState extends State<MapView> {
               ),
             ),
             // Show current location button
+            // SafeArea(
+            //   child: Align(
+            //     alignment: Alignment.bottomRight,
+            //     child: Padding(
+            //       padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+            //       child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.end,
+            //         mainAxisSize: MainAxisSize.max,
+            //         children: <Widget>[
+            //           ClipOval(
+            //             child: Material(
+            //               color: Colors.orange[100], // button color
+            //               child: InkWell(
+            //                 splashColor: Colors.orange, // inkwell color
+            //                 child: SizedBox(
+            //                   width: 56,
+            //                   height: 56,
+            //                   child: Icon(Icons.my_location),
+            //                 ),
+            //                 onTap: () {
+            //                   mapController.animateCamera(
+            //                     CameraUpdate.newCameraPosition(
+            //                       CameraPosition(
+            //                         target: LatLng(
+            //                           _currentPosition.latitude,
+            //                           _currentPosition.longitude,
+            //                         ),
+            //                         zoom: 18.0,
+            //                       ),
+            //                     ),
+            //                   );
+            //                 },
+            //               ),
+            //             ),
+            //           )
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SafeArea(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 30.0, horizontal: 0.0),
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
                       ClipOval(
                         child: Material(
-                          color: Colors.orange[100], // button color
+                          color: Colors.red[400], // button color
                           child: InkWell(
-                            splashColor: Colors.orange, // inkwell color
+                            splashColor: Colors.red, // inkwell color
                             child: SizedBox(
-                              width: 56,
-                              height: 56,
-                              child: Icon(Icons.my_location),
+                              width: 100,
+                              height: 100,
+                              child: Center(
+                                child: Text(
+                                  'SOS',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
                             onTap: () {
                               mapController.animateCamera(
-                                CameraUpdate.newCameraPosition(
-                                  CameraPosition(
-                                    target: LatLng(
-                                      _currentPosition.latitude,
-                                      _currentPosition.longitude,
-                                    ),
-                                    zoom: 18.0,
-                                  ),
-                                ),
+                                CameraUpdate.zoomIn(),
                               );
                             },
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
