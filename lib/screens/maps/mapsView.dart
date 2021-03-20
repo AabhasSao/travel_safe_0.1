@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
@@ -459,8 +460,7 @@ class _MapViewState extends State<MapView> {
                                       } else {
                                         _scaffoldKey.currentState.showSnackBar(
                                           SnackBar(
-                                            content: Text(
-                                                'Error Calculating Distance'),
+                                            content: Text('Invalid Address'),
                                           ),
                                         );
                                       }
