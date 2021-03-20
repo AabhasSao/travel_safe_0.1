@@ -10,6 +10,9 @@ class _SignUpState extends State<SignUp> {
   String _contactNo;
   String _email;
   String _address;
+  String _aadhar;
+  String _password;
+  String _emergencyContactNo;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -47,7 +50,7 @@ class _SignUpState extends State<SignUp> {
         return null;
       },
       onSaved: (String value) {
-        _name = value;
+        _email = value;
       },
     );
   }
@@ -65,7 +68,80 @@ class _SignUpState extends State<SignUp> {
         return null;
       },
       onSaved: (String value) {
-        _name = value;
+        _password = value;
+      },
+    );
+  }
+
+  Widget _buildAadhar() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Aadhar No *',
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please aadhar no';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _aadhar = value;
+      },
+    );
+  }
+
+  String validateMobile(String value) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return 'Please enter mobile number';
+    } else if (!regExp.hasMatch(value)) {
+      return 'Please enter valid mobile number';
+    }
+    return null;
+  }
+
+  Widget _buildContactNo() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Contact no. *',
+      ),
+      validator: (value) {
+        return validateMobile(value);
+      },
+      onSaved: (String value) {
+        _contactNo = value;
+      },
+    );
+  }
+
+  Widget _buildEmergencyContactNo() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Emergency Contact no.  *',
+      ),
+      validator: (value) {
+        return validateMobile(value);
+      },
+      onSaved: (String value) {
+        _emergencyContactNo = value;
+      },
+    );
+  }
+
+  Widget _buildAddress() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Address *',
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter your address.';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _address = value;
       },
     );
   }
@@ -79,6 +155,10 @@ class _SignUpState extends State<SignUp> {
             _buildName(),
             _buildEmail(),
             _buildPassword(),
+            _buildAadhar(),
+            _buildAddress(),
+            _buildContactNo(),
+            _buildEmergencyContactNo(),
             ElevatedButton(
               child: Text('Submit'),
               onPressed: () {

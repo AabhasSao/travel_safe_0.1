@@ -7,6 +7,6 @@ import 'package:travel_safe/screens/qr_scanner.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Map();
+    return SignUp();
   }
 }
