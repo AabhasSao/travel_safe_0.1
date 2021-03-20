@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_safe/screens/Gmaps.dart';
 import 'package:travel_safe/screens/auth/SignUp.dart';
 import 'package:travel_safe/screens/basic_layout.dart';
 import 'package:travel_safe/screens/home.dart';
@@ -14,7 +15,10 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: BasicLayout(widgt: SignIn()),
+      home: BasicLayout(
+        widgt: Gmaps(),
+        fullWidth: true,
+      ),
     );
   }
 }
