@@ -7,6 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:math' show cos, sqrt, asin;
 
+import 'package:travel_safe/screens/maps/customAlertDialog.dart';
+
 class MapView extends StatefulWidget {
   @override
   _MapViewState createState() => _MapViewState();
@@ -490,46 +492,46 @@ class _MapViewState extends State<MapView> {
               ),
             ),
             // Show current location button
-            // SafeArea(
-            //   child: Align(
-            //     alignment: Alignment.bottomRight,
-            //     child: Padding(
-            //       padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
-            //       child: Column(
-            //         mainAxisAlignment: MainAxisAlignment.end,
-            //         mainAxisSize: MainAxisSize.max,
-            //         children: <Widget>[
-            //           ClipOval(
-            //             child: Material(
-            //               color: Colors.orange[100], // button color
-            //               child: InkWell(
-            //                 splashColor: Colors.orange, // inkwell color
-            //                 child: SizedBox(
-            //                   width: 56,
-            //                   height: 56,
-            //                   child: Icon(Icons.my_location),
-            //                 ),
-            //                 onTap: () {
-            //                   mapController.animateCamera(
-            //                     CameraUpdate.newCameraPosition(
-            //                       CameraPosition(
-            //                         target: LatLng(
-            //                           _currentPosition.latitude,
-            //                           _currentPosition.longitude,
-            //                         ),
-            //                         zoom: 18.0,
-            //                       ),
-            //                     ),
-            //                   );
-            //                 },
-            //               ),
-            //             ),
-            //           )
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      ClipOval(
+                        child: Material(
+                          color: Colors.orange[100], // button color
+                          child: InkWell(
+                            splashColor: Colors.orange, // inkwell color
+                            child: SizedBox(
+                              width: 56,
+                              height: 56,
+                              child: Icon(Icons.my_location),
+                            ),
+                            onTap: () {
+                              mapController.animateCamera(
+                                CameraUpdate.newCameraPosition(
+                                  CameraPosition(
+                                    target: LatLng(
+                                      _currentPosition.latitude,
+                                      _currentPosition.longitude,
+                                    ),
+                                    zoom: 18.0,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
             SafeArea(
               child: Padding(
                 padding:
@@ -557,9 +559,23 @@ class _MapViewState extends State<MapView> {
                               ),
                             ),
                             onTap: () {
-                              mapController.animateCamera(
-                                CameraUpdate.zoomIn(),
-                              );
+                              var dialog = CustomAlertDialog(
+                                  title: "Request Help",
+                                  message:
+                                      "Are you sure, do you want to contact emergency services?",
+                                  onPostivePressed: () {
+                                    _scaffoldKey.currentState
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                          'Sending your location, reaching help'),
+                                    ));
+                                    Navigator.of(context).pop();
+                                  },
+                                  positiveBtnText: 'Yes',
+                                  negativeBtnText: 'Cancel');
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) => dialog);
                             },
                           ),
                         ),
