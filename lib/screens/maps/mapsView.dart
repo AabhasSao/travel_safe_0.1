@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:travel_safe/components/secrets.dart'; // Stores the Google Maps API Key
+import 'file:///D:/CSE/hackNITR/travel_safe_0.1/lib/secrets/secrets.dart'; // Stores the Google Maps API Key
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'dart:math' show cos, sqrt, asin;

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_safe/components/inputFieldForm.dart';
 import 'package:travel_safe/models/AddUser.dart';
 import 'package:travel_safe/models/AppUser.dart';
 import 'package:travel_safe/services/authentication/auth.dart';
@@ -24,28 +25,24 @@ class _SignUpState extends State<SignUp> {
   AuthService _auth = AuthService();
 
   Widget _buildName() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Full Name *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Full Name *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _name = value;
       },
     );
   }
 
   Widget _buildEmail() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Email *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Email *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
@@ -56,42 +53,38 @@ class _SignUpState extends State<SignUp> {
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _email = value;
       },
     );
   }
 
   Widget _buildPassword() {
-    return TextFormField(
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Password *',
+      hide: true,
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _password = value;
       },
     );
   }
 
   Widget _buildAadhar() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Aadhar No *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Aadhar No *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please aadhar no';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _aadhar = value;
       },
     );
@@ -109,62 +102,54 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget _buildContactNo() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Contact no. *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Contact no. *',
+      validatorCallback: (value) {
         return validateMobile(value);
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _contactNo = value;
       },
     );
   }
 
   Widget _buildEmergencyContactNo() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Emergency Contact no.  *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Emergency Contact no.  *',
+      validatorCallback: (value) {
         return validateMobile(value);
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _emergencyContactNo = value;
       },
     );
   }
 
   Widget _buildAddress() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Address *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Address *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter your address.';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _address = value;
       },
     );
   }
 
   Widget _buildEmergencyContactRelation() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Emergency Contact Relation *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Emergency Contact Relation *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return 'Please enter some text.';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _emergencyContactRelation = value;
       },
     );
@@ -219,14 +204,34 @@ class _SignUpState extends State<SignUp> {
           key: _formKey,
           child: Column(
             children: <Widget>[
+              Container(
+                child: Center(
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.blueAccent.withOpacity(0.8),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
               _buildName(),
+              SizedBox(height: 20),
               _buildEmail(),
+              SizedBox(height: 20),
               _buildPassword(),
+              SizedBox(height: 20),
               _buildAadhar(),
+              SizedBox(height: 20),
               _buildAddress(),
+              SizedBox(height: 20),
               _buildContactNo(),
+              SizedBox(height: 20),
               _buildEmergencyContactNo(),
+              SizedBox(height: 20),
               _buildEmergencyContactRelation(),
+              SizedBox(height: 20),
               ElevatedButton(
                 child: Text('Sign Up'),
                 onPressed: () {

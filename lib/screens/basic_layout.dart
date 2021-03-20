@@ -11,6 +11,7 @@ class BasicLayout extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: Text('Travel Safe'),
         backgroundColor: Colors.blue,
       ),
       body: Center(

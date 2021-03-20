@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travel_safe/components/inputField.dart';
+import 'package:travel_safe/components/inputFieldForm.dart';
 import 'package:travel_safe/models/AppUser.dart';
 import 'package:travel_safe/screens/auth/SignUp.dart';
 import 'package:travel_safe/screens/basic_layout.dart';
@@ -19,29 +21,25 @@ class _SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
 
   Widget _buildPassword() {
-    return TextFormField(
-      obscureText: true,
-      decoration: InputDecoration(
-        labelText: 'Password *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Password *',
+      hide: true,
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _password = value;
       },
     );
   }
 
   Widget _buildEmail() {
-    return TextFormField(
-      decoration: InputDecoration(
-        labelText: 'Email *',
-      ),
-      validator: (value) {
+    return MyInputFieldForm().textField(
+      label: 'Email *',
+      validatorCallback: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
@@ -52,7 +50,7 @@ class _SignInState extends State<SignIn> {
         }
         return null;
       },
-      onSaved: (String value) {
+      locationCallback: (String value) {
         _email = value;
       },
     );
@@ -64,8 +62,23 @@ class _SignInState extends State<SignIn> {
         key: _formKey,
         child: Column(
           children: <Widget>[
+            SizedBox(height: 40),
+            Container(
+              child: Center(
+                child: Text(
+                  'Log In',
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.blueAccent.withOpacity(0.8),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 40),
             _buildEmail(),
+            SizedBox(height: 20),
             _buildPassword(),
+            SizedBox(height: 20),
             ElevatedButton(
               child: Text('Sign In'),
               onPressed: () async {
@@ -91,7 +104,10 @@ class _SignInState extends State<SignIn> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => BasicLayout(widgt: SignUp())),
+                      builder: (context) => BasicLayout(
+                            widgt: SignUp(),
+                            fullWidth: false,
+                          )),
                 );
               },
               child: Text('Create An Account'),

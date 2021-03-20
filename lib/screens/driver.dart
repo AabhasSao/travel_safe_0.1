@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_safe/models/GetDriver.dart';
-import 'package:travel_safe/screens/Gmaps.dart';
 import 'package:travel_safe/screens/basic_layout.dart';
+import 'package:travel_safe/screens/maps/mapsView.dart';
 
 class Driver extends StatelessWidget {
   final String vehicleId;
@@ -10,11 +11,9 @@ class Driver extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image(
-          image: NetworkImage(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-        ),
+        SizedBox(height: 40),
         GetDriver(vehicleId),
+        SizedBox(height: 60),
         FlatButton(
           padding: EdgeInsets.all(15),
           onPressed: () {
@@ -22,13 +21,14 @@ class Driver extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => BasicLayout(
-                  widgt: Gmaps(),
+                  widgt: MapView(),
                 ),
               ),
             );
           },
+
           child: Text(
-            "Proceed to Maps",
+            "Start Journey",
             style: TextStyle(color: Colors.indigo[900]),
           ),
           //Button having rounded rectangle border

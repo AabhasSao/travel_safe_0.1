@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class MyInputField {
-  Widget textField({
-    TextEditingController controller,
-    String label,
-    String hint,
-    String initialValue,
-    double width,
-    Icon prefixIcon,
-    Widget suffixIcon,
-    Function(String) locationCallback,
-    bool hide = false,
-  }) {
+class MyInputFieldForm {
+  Widget textField(
+      {TextEditingController controller,
+      String label,
+      String hint,
+      String initialValue,
+      double width,
+      Icon prefixIcon,
+      Widget suffixIcon,
+      Function(String) locationCallback,
+      Function(String) validatorCallback,
+      bool hide = false}) {
     return Container(
-      child: TextField(
-        obscureText: hide,
-        onChanged: (value) {
+      child: TextFormField(
+        onSaved: (value) {
           locationCallback(value);
         },
+        obscureText: hide,
+        validator: validatorCallback,
         controller: controller,
 // initialValue: initialValue,
         decoration: new InputDecoration(
