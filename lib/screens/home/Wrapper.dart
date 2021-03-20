@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_safe/screens/auth/SignUp.dart';
 import 'package:travel_safe/screens/home.dart';
 import 'package:travel_safe/screens/sign_in.dart';
 import 'package:travel_safe/screens/ui/error.dart';
@@ -27,7 +28,7 @@ class Wrapper extends StatelessWidget {
               } else if (snapshot.hasData) {
                 return Home();
               } else {
-                return SignIn();
+                return SignUp();
               }
             },
           ),

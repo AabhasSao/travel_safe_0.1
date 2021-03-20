@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_safe/models/AddUser.dart';
+import 'package:travel_safe/models/AppUser.dart';
+import 'package:travel_safe/services/authentication/auth.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -15,6 +19,8 @@ class _SignUpState extends State<SignUp> {
   String _emergencyContactNo;
 
   final _formKey = GlobalKey<FormState>();
+
+  AuthService _auth = AuthService();
 
   Widget _buildName() {
     return TextFormField(
@@ -146,6 +152,47 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  void _sendToFirestoreUsers() async {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+
+    // register user with email and password
+    final AppUser user = await _auth.register(_email, _password);
+    if (user == null) {
+      return null;
+    }
+    final String _uid = user.uid;
+
+    // Create a CollectionReference called users that references the firestore collection
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    await users
+        .doc(_uid)
+        .set({
+          'fullName': _name,
+          'aadharNo': _aadhar,
+          'address': _address,
+          'email': _email,
+          'contactNo': _contactNo,
+          'emergencyContactNo': _emergencyContactNo,
+          'uid': _uid,
+        })
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+  void showAlreadyExistsToast(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('User with this email already exists.'),
+        action: SnackBarAction(
+            label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -162,11 +209,7 @@ class _SignUpState extends State<SignUp> {
             ElevatedButton(
               child: Text('Submit'),
               onPressed: () {
-                if (!_formKey.currentState.validate()) {
-                  return;
-                }
-
-                _formKey.currentState.save();
+                _sendToFirestoreUsers();
               },
             )
           ],

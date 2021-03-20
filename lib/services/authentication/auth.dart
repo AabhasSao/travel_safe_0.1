@@ -9,10 +9,47 @@ class AuthService {
     return user != null ? AppUser(uid: user.uid) : null;
   }
 
-  // user stream
+  // signin with email
+  void sigInWithEmailPassword(String email, String password) async {
+    final String _email = email;
+    final String _password = password;
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _email,
+        password: _password,
+      );
+      print("signed in with email and password successful");
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
-  User _fromUserCredToUser(UserCredential userCred) {
-    return userCred != null ? userCred.user : null;
+  // Register with email and password
+  Future<AppUser> register(String email, String password) async {
+    final String _email = email;
+    final String _password = password;
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: _email, password: _password);
+      User user = userCredential.user;
+      print(user.uid);
+      return _appUserFromFirebaseUser(user);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 
   // Sign in with google
