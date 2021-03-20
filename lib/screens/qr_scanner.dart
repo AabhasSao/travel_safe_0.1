@@ -1,5 +1,6 @@
 import 'package:barcode_scan_fix/barcode_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_safe/components/inputField.dart';
 import 'package:travel_safe/screens/basic_layout.dart';
 import 'package:travel_safe/screens/driver.dart';
 
@@ -79,6 +80,10 @@ class _QrScannerState extends State<QrScanner> {
                 labelText: "Enter Vehicle no. manually",
                 labelStyle: TextStyle(color: Colors.grey),
               ),
+            ),
+            MyInputField().textField(
+              controller: _controller,
+              prefixIcon: Icon(Icons.edit),
             ),
             FlatButton(
               padding: EdgeInsets.all(15),

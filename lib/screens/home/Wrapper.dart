@@ -6,6 +6,7 @@ import 'package:travel_safe/screens/auth/SignUp.dart';
 import 'package:travel_safe/screens/basic_layout.dart';
 import 'package:travel_safe/screens/home.dart';
 import 'package:travel_safe/screens/auth/signIn.dart';
+import 'package:travel_safe/screens/maps/mapsView.dart';
 import 'package:travel_safe/screens/ui/error.dart';
 import 'package:travel_safe/screens/ui/loading.dart';
 
@@ -16,7 +17,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: BasicLayout(
-        widgt: Gmaps(),
+        widgt: MapView(),
         fullWidth: true,
       ),
     );
