@@ -9,6 +9,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="travel_safe"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBHVSfTRiwu33flidBtZ478iEuj2M6zkoI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
