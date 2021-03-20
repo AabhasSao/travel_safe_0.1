@@ -214,31 +214,33 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Column(
-          children: <Widget>[
-            _buildName(),
-            _buildEmail(),
-            _buildPassword(),
-            _buildAadhar(),
-            _buildAddress(),
-            _buildContactNo(),
-            _buildEmergencyContactNo(),
-            _buildEmergencyContactRelation(),
-            ElevatedButton(
-              child: Text('Sign Up'),
-              onPressed: () {
-                _sendToFirestoreUsers();
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text('Log in to an existing account'),
-            ),
-          ],
-        ));
+    return SingleChildScrollView(
+      child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              _buildName(),
+              _buildEmail(),
+              _buildPassword(),
+              _buildAadhar(),
+              _buildAddress(),
+              _buildContactNo(),
+              _buildEmergencyContactNo(),
+              _buildEmergencyContactRelation(),
+              ElevatedButton(
+                child: Text('Sign Up'),
+                onPressed: () {
+                  _sendToFirestoreUsers();
+                },
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Log in to an existing account'),
+              ),
+            ],
+          )),
+    );
   }
 }

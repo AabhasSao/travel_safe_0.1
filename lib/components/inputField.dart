@@ -12,7 +12,6 @@ class MyInputField {
     Function(String) locationCallback,
   }) {
     return Container(
-      width: width * 0.8,
       child: TextField(
         onChanged: (value) {
           locationCallback(value);
