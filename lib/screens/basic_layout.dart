@@ -5,12 +5,15 @@ class BasicLayout extends StatelessWidget {
   final Widget widgt;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Container(
+          width: MediaQuery.of(context).size.width / 1.3,
+          child: widgt == null ? Text("Hey") : widgt,
         ),
-        body: widgt == null ? Text("Hey") : widgt,
       ),
     );
   }

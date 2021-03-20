@@ -5,7 +5,7 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Center(
-        child: LinearProgressIndicator(),
+        child: CircularProgressIndicator(),
       ),
     );
   }

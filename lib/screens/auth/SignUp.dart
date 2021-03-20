@@ -17,6 +17,7 @@ class _SignUpState extends State<SignUp> {
   String _aadhar;
   String _password;
   String _emergencyContactNo;
+  String _emergencyContactRelation;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -152,6 +153,23 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
+  Widget _buildEmergencyContactRelation() {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Emergency Contact Relation *',
+      ),
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+        return null;
+      },
+      onSaved: (String value) {
+        _emergencyContactRelation = value;
+      },
+    );
+  }
+
   void _sendToFirestoreUsers() async {
     if (!_formKey.currentState.validate()) {
       return;
@@ -177,6 +195,7 @@ class _SignUpState extends State<SignUp> {
           'contactNo': _contactNo,
           'emergencyContactNo': _emergencyContactNo,
           'uid': _uid,
+          'emergencyContactRelation': _emergencyContactRelation,
         })
         .then((value) => print("User Added"))
         .catchError((error) => print("Failed to add user: $error"));
@@ -206,12 +225,19 @@ class _SignUpState extends State<SignUp> {
             _buildAddress(),
             _buildContactNo(),
             _buildEmergencyContactNo(),
+            _buildEmergencyContactRelation(),
             ElevatedButton(
               child: Text('Sign Up'),
               onPressed: () {
                 _sendToFirestoreUsers();
               },
-            )
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Log in to an existing account'),
+            ),
           ],
         ));
   }

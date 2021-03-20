@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel_safe/models/AppUser.dart';
+import 'package:travel_safe/screens/auth/SignUp.dart';
+import 'package:travel_safe/screens/basic_layout.dart';
+import 'package:travel_safe/screens/qr_scanner.dart';
 import 'package:travel_safe/services/authentication/auth.dart';
 
 import '../home.dart';
@@ -12,6 +15,7 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   String _email;
   String _password;
+  bool _isSigninIn = false;
 
   AuthService _auth = AuthService();
 
@@ -73,17 +77,30 @@ class _SignInState extends State<SignIn> {
                 }
                 _formKey.currentState.save();
 
+                _isSigninIn = true;
+
                 AppUser user =
                     await _auth.sigInWithEmailPassword(_email, _password);
                 if (user == null) {
+                  _isSigninIn = false;
                   return;
                 } else {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Home()),
+                    MaterialPageRoute(builder: (context) => QrScanner()),
                   );
                 }
               },
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BasicLayout(widgt: SignUp())),
+                );
+              },
+              child: Text('Create An Account'),
             )
           ],
         ));

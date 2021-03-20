@@ -17,12 +17,34 @@ class _MapState extends State<Map> {
 
   @override
   Widget build(BuildContext context) {
+    // Determining the screen width & height
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+
+    // Initial location of the Map view
+    CameraPosition _initialLocation = CameraPosition(target: LatLng(0.0, 0.0));
+
+    // For controlling the view of the Map
+    GoogleMapController mapController;
+
     return Container(
-      child: GoogleMap(
-        onMapCreated: _onMapCreated,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 11.0,
+      height: height,
+      width: width,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            GoogleMap(
+              initialCameraPosition: _initialLocation,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              mapType: MapType.normal,
+              zoomGesturesEnabled: true,
+              zoomControlsEnabled: false,
+              onMapCreated: (GoogleMapController controller) {
+                mapController = controller;
+              },
+            ),
+          ],
         ),
       ),
     );
