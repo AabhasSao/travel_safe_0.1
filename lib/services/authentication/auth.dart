@@ -10,7 +10,7 @@ class AuthService {
   }
 
   // signin with email
-  void sigInWithEmailPassword(String email, String password) async {
+  Future<AppUser> sigInWithEmailPassword(String email, String password) async {
     final String _email = email;
     final String _password = password;
     try {
@@ -19,6 +19,8 @@ class AuthService {
         email: _email,
         password: _password,
       );
+      User user = userCredential.user;
+      return _appUserFromFirebaseUser(user);
       print("signed in with email and password successful");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -26,6 +28,7 @@ class AuthService {
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+      return null;
     }
   }
 

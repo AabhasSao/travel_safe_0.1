@@ -207,7 +207,7 @@ class _SignUpState extends State<SignUp> {
             _buildContactNo(),
             _buildEmergencyContactNo(),
             ElevatedButton(
-              child: Text('Submit'),
+              child: Text('Sign Up'),
               onPressed: () {
                 _sendToFirestoreUsers();
               },
