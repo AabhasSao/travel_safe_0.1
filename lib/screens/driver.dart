@@ -21,7 +21,9 @@ class Driver extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => BasicLayout(
-                  widgt: MapView(),
+                  widgt: MapView(
+                    driverId: vehicleId,
+                  ),
                 ),
               ),
             );
