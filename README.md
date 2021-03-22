@@ -1,6 +1,10 @@
 # travel_safe
 
 travel safety  in taking a ride
+## usage 
+Enter your own Google maps API key for map to work. Currently it is disbled.
+In main Android.manifest
+, Secrets.dart
 
 ## Getting Started
 
